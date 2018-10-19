@@ -1,0 +1,21 @@
+{
+    "name": "auzadventure/yii2-jsondb",
+    "description": "Extension to Add and Save a flat file json",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","json","flatfile"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "auzadventure",
+            "email": "admin@wesvault.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "~2.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "auzadventure\\jsondb\\": ""
+        }
+    }
+}
