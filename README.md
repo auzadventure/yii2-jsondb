@@ -27,5 +27,44 @@ Usage
 
 Once the extension is installed, simply use it in your code by  :
 
-```php
-<?= \auzadventure\jsondb\AutoloadExample::widget(); ?>```
+```
+<?php 
+$json_path = Url::to('@app/path/json_file.json')
+
+$jsonDB = \auzadventure\jsondb\JsonDB($json_path); 
+
+It will save a record in the json format with a lastID 
+
+{
+    "data": {
+        "1": {
+            "date": "today",
+            "msg": "milk is good"
+        }
+    },
+    "conf": {
+        "lastID": 1
+    }
+}
+
+```
+
+
+## Insert 
+
+``` $jsonDB->insert($array) ```
+
+## FindAll
+
+``` $jsonDB->findAll() ```
+
+## Find Field = Val 
+
+``` ->find(string $field, string $val) 
+
+# Find 
+
+->findOne($id) 
+
+```
+
