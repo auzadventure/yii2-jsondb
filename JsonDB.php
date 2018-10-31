@@ -75,7 +75,7 @@ class JsonDB extends \yii\base\Widget
 		$_row = $this->findOne($id);
 		
 		foreach($array as $key=>$value) {
-			$_row['key'] = $value;
+			$_row->$key = $value;
 		}
 		
 		$data->data->$id = $_row;
