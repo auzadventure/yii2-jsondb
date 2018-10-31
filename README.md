@@ -68,3 +68,70 @@ It will save a record in the json format with a lastID
 
 ```
 
+
+## Sample Model to extend 
+
+```
+<?php 
+
+namespace app\models;
+
+use Yii;
+use yii\base\Model;
+use auzadventure\jsondb\JsonDB;
+use yii\helpers\Url;
+
+
+class Ads extends Model {
+	
+	public $title;
+	public $url;
+	public $blurp;
+	
+	public $filepath;
+	public $jsondb; 
+	public $id; 
+	
+	public function rules()
+    {
+        return [
+            // name, email, subject and body are required
+            [['title', 'url', 'blurp'], 'required'],
+            
+        ];
+    }
+	
+	
+	public function __construct() {
+		$this->filepath = $this->getFilePath();
+		$this->jsondb = new JsonDB($this->filepath);
+	}
+	
+	
+	public function getFilePath() {
+		return Url::to('@app/data/ads.json');
+	}
+	
+	
+	public function findAll() {
+		return $this->jsondb->findAll()->data;
+	}
+	
+	public function save() {
+		
+		$file = self::getFilePath();
+		
+		$jsondb = new JsonDB($file);
+		$jsondb->insert(['title'=>$this->title,
+						 'url'=>$this->url,
+						 'blurp'=>$this->blurp
+						]);
+			
+	}
+	
+	public function delete($id) {
+		return $this->jsondb->deleteByID($id);
+	}
+
+}
+```
