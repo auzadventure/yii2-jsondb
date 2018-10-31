@@ -22,9 +22,6 @@ class JsonDB extends \yii\base\Widget
         return "Hello!";
     }
 	
-
-	
-	
 	
 	// insert 
 	public function insert(array $row) {
@@ -35,10 +32,11 @@ class JsonDB extends \yii\base\Widget
 		$rows['data'] = $rows['data'] + $_row;
 		$rows['conf'] = ['lastID'=>$_lastID]; 
 		$this->save($rows);
-	
 	}
 	
 	
+	
+	// find 
 	public function find(string $field, string $val) {
 		$rows = $this->findAll()->data;
 		foreach($rows as $row) {
@@ -68,6 +66,21 @@ class JsonDB extends \yii\base\Widget
 		$rows = $this->findAll();
 		$lastID = $rows->conf->lastID;
 		return $lastID;
+	}
+	
+	public function update(int $id,array $array) {
+		
+		$data = $this->findAll();
+		
+		$_row = $this->findOne($id);
+		
+		foreach($array as $key=>$value) {
+			$_row['key'] = $value;
+		}
+		
+		$data->data->$id = $_row;
+		$this->save($data);
+			
 	}
 	
 	
